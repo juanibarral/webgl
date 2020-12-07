@@ -1,0 +1,44 @@
+<html>
+<style type="text/css">
+    canvas {
+        background: blue;
+    }
+</style>
+<script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 aPos;
+    attribute vec4 aColor;
+    
+    uniform mat4 uModelViewMatrix;
+    uniform mat4 uProjectionMatrix;
+    uniform float uPointSize;
+
+    varying lowp vec4 vColor;
+    void main()
+    {
+        gl_Position = uProjectionMatrix * uModelViewMatrix * aPos;
+        gl_PointSize = uPointSize;
+        vColor = aColor;
+    }
+</script>
+<script id="fragment-shader" type="x-shader/x-fragment">
+    varying lowp vec4 vColor;
+    void main()
+    {
+        gl_FragColor = vColor;
+    }
+</script>
+<script type="text/javascript" src="http://www.khronos.org/registry/webgl/sdk/demos/common/webgl-utils.js"></script>
+<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+<script type="text/javascript" src="js/InitShaders.js"></script>
+<script type="text/javascript" src="js/ejes.js"></script>
+<script type="text/javascript" src="js/piramide.js"></script>
+<script type="text/javascript" src="js/taller_05.js"></script>
+
+<body>
+    <canvas id="gl-canvas" width="512" height="512"> Oops ... your browser doesn’t support the HTML5 canvas element</canvas>
+    <form>
+        <button type="button" name="change" id="change_button" onclick="cambiarPrimitiva()">LINEAS</button>
+    </form>
+</body>
+
+</html>

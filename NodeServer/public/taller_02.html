@@ -1,0 +1,33 @@
+<html>
+<style type="text/css">
+    canvas {
+        background: blue;
+    }
+</style>
+<script id="vertex-shader-2" type="x-shader/x-vertex">
+    attribute vec4 aPos;
+    
+    uniform mat4 uModelViewMatrix;
+    uniform mat4 uProjectionMatrix;
+    void main()
+    {
+        gl_Position = uProjectionMatrix * uModelViewMatrix * aPos;
+    }
+</script>
+<script id="fragment-shader-2" type="x-shader/x-fragment">
+    void main()
+    {
+        // Todos los pixeles pintarlos de color azul
+        gl_FragColor = vec4(0, 0, 1.0, 1);
+    }
+</script>
+<script type="text/javascript" src="http://www.khronos.org/registry/webgl/sdk/demos/common/webgl-utils.js"></script>
+<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+<script type="text/javascript" src="js/InitShaders.js"></script>
+<script type="text/javascript" src="js/taller_02.js"></script>
+
+<body>
+    <canvas id="gl-canvas" width="512" height="512"> Oops ... your browser doesn’t support the HTML5 canvas element</canvas>
+</body>
+
+</html>
