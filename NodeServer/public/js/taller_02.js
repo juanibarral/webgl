@@ -18,14 +18,28 @@ function init() {
     if (!gl) { alert("WebGL isn’t available"); }
 
     // PASO 2: Inicializar los shaders GLSL y crear un programa de GLSL
-    var program = InitShaders(gl, "vertex-shader-2", "fragment-shader-2");
+    var program = InitShaders(gl, "vertex-shader", "fragment-shader");
 
-    // PASO 3: Ubicar donde los datos de los vertices deben ir (Unir los vértices con el vertex shader)
-    var aPos = gl.getAttribLocation(program, "aPos");
-    // Agregamos dos nuevos datos para calcular la nueva posición de los vértices usando las matrices de proyección y de modelo
+    // PASO 3: Obtener los ids de los attribute y uniform que se van a usar en el shader
+    var aPos = gl.getAttribLocation(program, "aPos"); // Posición de los vértices
+    var uModelMatrix = gl.getUniformLocation(program, 'uModelMatrix')
+    var uViewMatrix = gl.getUniformLocation(program, 'uViewMatrix')
     var uProjectionMatrix = gl.getUniformLocation(program, 'uProjectionMatrix')
-    var uModelViewMatrix = gl.getUniformLocation(program, 'uModelViewMatrix')
-    // Inicializamos los datos de la matríz de proyección
+    
+    // Paso 4: Inicializamos los datos de las matrices
+    // MODEL MATRIX
+    const modelMatrix = mat4.create()
+    // VIEW MATRIX
+    const viewMatrix = mat4.create()
+    const eye = [3, 3, 3]
+    const center = [0, 0, 0]
+    const up = [0, 1, 0]
+    mat4.lookAt(viewMatrix,
+        eye,
+        center,
+        up)
+
+    // PROJECTION MATRIX
     const fieldOfView = 45 * Math.PI / 180;   // Radianes
     const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
     const zNear = 0.1;
@@ -36,13 +50,8 @@ function init() {
         aspect,
         zNear,
         zFar);
-    // Inicializamos los datos de la matríz de modelo
-    const modelViewMatrix = mat4.create();
-    mat4.translate(modelViewMatrix,
-        modelViewMatrix,
-        [0.0, 0.0, -6.0]);
 
-    // PASO 4: Crear los vertices de la geometría
+    // PASO 5: Crear los vertices de la geometría en 3D
     var vertices = {
         data: '', // Datos de los vertices
         bufferId: '' // Buffer para los datos
@@ -50,12 +59,12 @@ function init() {
     // Crear los vertices
     vertices.data = new Float32Array(
         [
-            -0.90, -0.90, // Triángulo 1
-            0.85, -0.90,
-            -0.90, 0.85,
-            0.90, -0.85, // Triangulo 2
-            0.90, 0.90,
-            -0.85, 0.90
+            -0.90, -0.90, 0.0, // Triángulo 1
+            0.85, -0.90, 0.0,
+            -0.90, 0.85, 0.0,
+            0.90, -0.85, 0.0, // Triangulo 2
+            0.90, 0.90, 0.0,
+            -0.85, 0.90, 0.0
         ]);
     // Crear el buffer
     vertices.bufferId = gl.createBuffer();
@@ -79,19 +88,24 @@ function init() {
     // PASO 3: Decirle a WebGL que use nuestros programa
     gl.useProgram(program);
 
-    // PASO 4: Decirle a WebGL cómo debe leer los vertices y las nuevas matrices
-    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+    // PASO 4: Activar los attribute y uniform
+    gl.uniformMatrix4fv(
+        uModelMatrix,
+        false,
+        modelMatrix
+    )
+    gl.uniformMatrix4fv(
+        uViewMatrix,
+        false,
+        viewMatrix);
     gl.uniformMatrix4fv(
         uProjectionMatrix,
         false,
         projectionMatrix);
-    gl.uniformMatrix4fv(
-        uModelViewMatrix,
-        false,
-        modelViewMatrix);
 
     // Activar los vertices
     gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
 
     // PASO 5: dibujar
     gl.drawArrays(gl.TRIANGLES, 0, 6)

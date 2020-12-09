@@ -19,11 +19,9 @@ function init() {
  
     // PASO 2: Inicializar los shaders GLSL y crear un programa de GLSL
     var program = InitShaders(gl, "vertex-shader", "fragment-shader");
-
-    // PASO 3: Ubicar donde los datos de los vertices deben ir (Unir los vertices con el vertex shader)
     var aPos = gl.getAttribLocation(program, "aPos");
 
-    // PASO 4: Crear los vertices de la geometría
+    // PASO 3: Crear los vertices de la geometría
     var vertices = {
         data: '', // Datos de los vertices
         bufferId: '' // Buffer para los datos
@@ -48,23 +46,19 @@ function init() {
     // ****************************************
     // ETAPA DE RENDERING
     // ****************************************  
-    // PASO 1: Decirle a WebGL como transformar de espacio de CLIP a pixeles
+    // PASO 1: Preparar la ventana de visualizacion
     gl.viewport(0, 0, canvas.width, canvas.height);
-    
-    // PASO 2: Borrar el canvas
     // Aplicar un color de fondo
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     // Borrar el buffer de color
     gl.clear(gl.COLOR_BUFFER_BIT)
 
-    // PASO 3: Decirle a WebGL que use nuestros programa
+    // PASO 2: Decirle a WebGL que use nuestros programa
     gl.useProgram(program);
-    
+    // PASO 3: Activar los vertices
+    gl.enableVertexAttribArray(aPos);
     // PASO 4: Decirle a WebGL cómo debe leer los vertices
     gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
-    // Activar los vertices
-    gl.enableVertexAttribArray(aPos);
-
     // PASO 5: dibujar
     gl.drawArrays(gl.TRIANGLES, 0, 6)
 }

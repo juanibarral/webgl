@@ -8,6 +8,9 @@ window.onload = init;
 var camara
 var ejes
 var cono
+
+var uModelMatrix
+var modelMatrix
 /**
  * Funcion para inicial el programa
  */
@@ -18,10 +21,20 @@ function init() {
 
     program = InitShaders(gl, "vertex-shader", "fragment-shader");
 
-    camara = new Camera(gl.canvas)
-    camara.translate(0, 0, -10)
+    uModelMatrix = gl.getUniformLocation(program, 'uModelMatrix')
+    modelMatrix = mat4.create()
+    camara = new Camera()
+
+    console.log(camara.eye)
+    const val = 15
+    const x = camara.eye[2] * Math.cos(val * Math.PI / 180)
+    const z = camara.eye[2] * Math.sin(val * Math.PI / 180)
+
+    camara.eye = [x, camara.eye[1], z]
+
+    console.log(camara.eye)
     ejes = new Ejes()
-    cono = new Cone(2, 1, 3)
+    // cono = new Cone(2, 1, 3)
 
     render()
 }
@@ -33,19 +46,25 @@ function render() {
     gl.clear(gl.COLOR_BUFFER_BIT)
 
     gl.useProgram(program);
-
+    
+    gl.uniformMatrix4fv(
+        uModelMatrix,
+        false,
+        modelMatrix);
     camara.use()
     ejes.draw()
-    cono.draw()
+    // cono.draw()
     window.requestAnimFrame(render, canvas);
 }
 
 function updateRotCamY(value) {
-    camara.rotY(value)
+    // const x = camara.eye[2] * Math.cos(value * Math.PI / 180)
+    // const z = camara.eye[2] * Math.sin(value * Math.PI / 180)
+    // camara.eye = [x, camara.eye[1], z]
     document.getElementById('rot_cam_y').value = value + " grados"
 }
 
 function updateRotCamX(value) {
-    camara.rotX(value)
+    // camara.rotX(value)
     document.getElementById('rot_cam_x').value = value + " grados"
 }

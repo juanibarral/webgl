@@ -4,17 +4,18 @@
         background: blue;
     }
 </style>
-<script id="vertex-shader-2" type="x-shader/x-vertex">
+<script id="vertex-shader" type="x-shader/x-vertex">
     attribute vec4 aPos;
     
-    uniform mat4 uModelViewMatrix;
+    uniform mat4 uModelMatrix;
+    uniform mat4 uViewMatrix;
     uniform mat4 uProjectionMatrix;
     void main()
     {
-        gl_Position = uProjectionMatrix * uModelViewMatrix * aPos;
+        gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * aPos;
     }
 </script>
-<script id="fragment-shader-2" type="x-shader/x-fragment">
+<script id="fragment-shader" type="x-shader/x-fragment">
     void main()
     {
         // Todos los pixeles pintarlos de color azul
