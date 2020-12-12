@@ -33,6 +33,22 @@ app.get('/taller_05', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/taller_05.html'))
 })
 
+app.get('/taller_06', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/taller_06.html'))
+})
+
+app.get('/taller_07', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/taller_07.html'))
+})
+
+app.get('/taller_08', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/taller_08.html'))
+})
+
+app.get('/taller_09', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/taller_09.html'))
+})
+
 app.listen(port, () => {
   console.log(`Example application listening at http://localhost:${port}`)
 })

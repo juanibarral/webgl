@@ -34,19 +34,19 @@ function init() {
     const pointSize = 5
 
     camera = new Camera()
-
+    camera.eye = [0, 0, 3]
     const vertices = {
         data: '', // Datos de los vertices
         bufferId: '' // Buffer para los datos
     };
     vertices.data = new Float32Array(
         [
-            -0.90, -0.90, // Triángulo 1
-            0.85, -0.90,
-            -0.90, 0.85,
-            0.90, -0.85, // Triangulo 2
-            0.90, 0.90,
-            -0.85, 0.90
+            -0.30, -0.60,
+            0.30, -0.60,
+            0.60, 0.0,
+            0.30, 0.60, 
+            -0.30, 0.60,
+            -0.60, 0.0
         ]);
     vertices.bufferId = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vertices.bufferId);
