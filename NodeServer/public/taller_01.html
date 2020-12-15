@@ -6,16 +6,22 @@
 </style>
 <script id="vertex-shader" type="x-shader/x-vertex">
     attribute vec4 aPos;
+    attribute vec4 aColor;
+
+    uniform float uOffset;
+    varying lowp vec4 vColor;
     void main()
     {
-        gl_Position = aPos;
+        gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+        vColor = aColor;
     }
 </script>
 <script id="fragment-shader" type="x-shader/x-fragment">
+    varying lowp vec4 vColor;
     void main()
     {
         // Todos los pixeles pintarlos de color azul
-        gl_FragColor = vec4(0, 0, 1.0, 1);
+        gl_FragColor = vColor;
     }
 </script>
 <script type="text/javascript" src="http://www.khronos.org/registry/webgl/sdk/demos/common/webgl-utils.js"></script>

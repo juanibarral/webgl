@@ -1,0 +1,51 @@
+<html>
+<style type="text/css">
+    canvas {
+        background: blue;
+    }
+</style>
+<script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 aPos;
+    attribute vec4 aColor;
+    
+    uniform mat4 uModelMatrix;
+    uniform mat4 uViewMatrix;
+    uniform mat4 uProjectionMatrix;
+
+    varying lowp vec4 vColor;
+    void main()
+    {
+        gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * aPos;
+        gl_PointSize = 5.0;
+        vColor = aColor;
+    }
+</script>
+<script id="fragment-shader" type="x-shader/x-fragment">
+    varying lowp vec4 vColor;
+    void main()
+    {
+        gl_FragColor = vColor;
+    }
+</script>
+<script type="text/javascript" src="http://www.khronos.org/registry/webgl/sdk/demos/common/webgl-utils.js"></script>
+<script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+<script type="text/javascript" src="js/InitShaders.js"></script>
+<script type="text/javascript" src="js/ejes.js"></script>
+<script type="text/javascript" src="js/cono.js"></script>
+<script type="text/javascript" src="js/test.js"></script>
+<script type="text/javascript" src="js/camera.js"></script>
+<script type="text/javascript" src="js/taller_11.js"></script>
+
+<body>
+    <canvas id="gl-canvas" width="512" height="512"> Oops ... your browser doesn’t support the HTML5 canvas element</canvas>
+    <form>
+        <h3>Controles de cámara</h3>
+        <input type="range" name="range_cam_y" id="r_cam_y" min="-90" max="90" value="30" oninput="updateRotCamY(this.value)" style="width: 400px;"/>
+        <input type="text" id="rot_cam_y" readonly></input>
+        <br>
+        <input type="range" name="range_cam_x" id="r_cam_x" min="-45" max="45" value="25" oninput="updateRotCamX(this.value)" style="width: 400px;"/>
+        <input type="text" id="rot_cam_x" readonly></input>
+    </form>
+</body>
+
+</html>
