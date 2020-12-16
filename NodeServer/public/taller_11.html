@@ -7,32 +7,38 @@
 <script id="vertex-shader" type="x-shader/x-vertex">
     attribute vec4 aPos;
     attribute vec4 aColor;
+    attribute vec2 aTexcoord;
     
     uniform mat4 uModelMatrix;
     uniform mat4 uViewMatrix;
     uniform mat4 uProjectionMatrix;
 
     varying lowp vec4 vColor;
+    varying lowp vec2 vTexcoord;
     void main()
     {
         gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * aPos;
         gl_PointSize = 5.0;
         vColor = aColor;
+        vTexcoord = aTexcoord;
     }
 </script>
 <script id="fragment-shader" type="x-shader/x-fragment">
     varying lowp vec4 vColor;
+    varying lowp vec2 vTexcoord;
+
+    uniform sampler2D uTexture;
     void main()
     {
-        gl_FragColor = vColor;
+        //gl_FragColor = vColor;
+        gl_FragColor = texture2D(uTexture, vTexcoord);
     }
 </script>
 <script type="text/javascript" src="http://www.khronos.org/registry/webgl/sdk/demos/common/webgl-utils.js"></script>
 <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
 <script type="text/javascript" src="js/InitShaders.js"></script>
 <script type="text/javascript" src="js/ejes.js"></script>
-<script type="text/javascript" src="js/cono.js"></script>
-<script type="text/javascript" src="js/test.js"></script>
+<script type="text/javascript" src="js/square.js"></script>
 <script type="text/javascript" src="js/camera.js"></script>
 <script type="text/javascript" src="js/taller_11.js"></script>
 

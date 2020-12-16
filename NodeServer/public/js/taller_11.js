@@ -1,14 +1,9 @@
-// Variable para guardar el canvas
 var canvas;
-// Variable para guardar el contexto WebGL
 var gl;
-// Cuando la página HTML termine de cargar, lanzar el método init
 window.onload = init;
 
 var camara
-var ejes
-var cono
-var test
+var square
 
 var uModelMatrix
 var modelMatrix
@@ -33,12 +28,13 @@ function init() {
     const x = 10 * Math.cos(theta * Math.PI / 180) * Math.sin(phi * Math.PI / 180)
     const y = 10 * Math.sin(theta * Math.PI / 180)
     camara.eye = [x, y, z]
-    ejes = new Ejes()
-    cono = new Cone(2, 2, 15)
-    // test = new Test()
+    square = new Square()
 
     gl.enable(gl.CULL_FACE)
     gl.enable(gl.DEPTH_TEST)
+
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
     render()
 }
@@ -46,7 +42,7 @@ function init() {
 function render() {
     gl.viewport(0, 0, canvas.width, canvas.height);
 
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clearColor(0.6, 0.6, 0.6, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
     gl.useProgram(program);
@@ -56,9 +52,7 @@ function render() {
         false,
         modelMatrix);
     camara.use()
-    ejes.draw()
-    cono.draw()
-    // test.draw()
+    square.draw()
     window.requestAnimFrame(render, canvas);
 }
 
