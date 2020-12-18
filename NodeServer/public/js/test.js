@@ -4,7 +4,7 @@ class Test {
         this.vertices = new Float32Array([
             3.0, 0.0, 0.0,
             0.0, 3.0, 0.0,
-            -3.0, 0.0, 0.0
+            -3.0, 0.0, 3.0
         ])
         this.bufferId = gl.createBuffer()
         gl.bindBuffer(gl.ARRAY_BUFFER, this.bufferId)

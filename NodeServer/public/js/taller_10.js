@@ -15,6 +15,10 @@ const greenMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } )
 const blueMaterial = new THREE.MeshBasicMaterial( { color: 0x0000ff } )
 const yellowMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00 } )
 
+
+
+
+
 // Parts
 const chest = new THREE.Mesh( boxGeometry, greenMaterial )
 chest.scale.x = 3

@@ -34,12 +34,17 @@ function init() {
     const y = 10 * Math.sin(theta * Math.PI / 180)
     camara.eye = [x, y, z]
     ejes = new Ejes()
-    cono = new Cone(2, 2, 15)
-    // test = new Test()
+    // cono = new Cone(2, 2, 15)
+    test = new Test()
 
     gl.enable(gl.CULL_FACE)
-    gl.enable(gl.DEPTH_TEST)
+    // gl.enable(gl.DEPTH_TEST)
 
+    // mat4.translate(
+    //     modelMatrix,
+    //     modelMatrix,
+    //     [3, 0, 0]
+    // )
     render()
 }
 
@@ -50,15 +55,14 @@ function render() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 
     gl.useProgram(program);
+
+    // mat4.translate()
     
-    gl.uniformMatrix4fv(
-        uModelMatrix,
-        false,
-        modelMatrix);
+
     camara.use()
     ejes.draw()
-    cono.draw()
-    // test.draw()
+    // cono.draw()
+    test.draw()
     window.requestAnimFrame(render, canvas);
 }
 

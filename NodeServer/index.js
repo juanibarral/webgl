@@ -61,6 +61,18 @@ app.get('/taller_12', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/taller_12.html'))
 })
 
+app.get('/tester', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/tester.html'))
+})
+
+app.get('/taller', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/taller.html'))
+})
+
+app.get('/tallerthreejs', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/tallerthreejs.html'))
+})
+
 app.listen(port, () => {
   console.log(`Example application listening at http://localhost:${port}`)
 })
