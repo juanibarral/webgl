@@ -3,8 +3,8 @@ illum 4
 Kd 1.00 1.00 1.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd mapkd2.png
-bump bump.png -bm 2
+map_Kd mapkd.png
+# bump bump.png -bm 2
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns -1.00

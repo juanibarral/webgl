@@ -61,6 +61,26 @@ app.get('/taller_12', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/taller_12.html'))
 })
 
+app.get('/taller_13', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/taller_13.html'))
+})
+
+app.get('/taller_14', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/taller_14.html'))
+})
+
+app.get('/taller_15', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/taller_15.html'))
+})
+
+app.get('/taller_16', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/taller_16.html'))
+})
+
+app.get('/taller_17', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/taller_17.html'))
+})
+
 app.get('/tester', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/tester.html'))
 })
@@ -71,6 +91,10 @@ app.get('/taller', (req, res) => {
 
 app.get('/tallerthreejs', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/tallerthreejs.html'))
+})
+
+app.get('/tallerobj', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/tallerobj.html'))
 })
 
 app.listen(port, () => {

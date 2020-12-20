@@ -11,22 +11,15 @@ class Square {
         gl.bindBuffer(gl.ARRAY_BUFFER, this.bufferId)
         gl.bufferData(gl.ARRAY_BUFFER, this.vertices, gl.STATIC_DRAW)
         
-        // Colores
-        this.colors = new Float32Array([
-            1.0, 0.0, 0.0, 1.0,
-            1.0, 0.0, 0.0, 1.0,
-            1.0, 0.0, 0.0, 1.0,
-            1.0, 0.0, 0.0, 1.0
-        ])
-        this.colorBufferId = gl.createBuffer()
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBufferId)
-        gl.bufferData(gl.ARRAY_BUFFER, this.colors, gl.STATIC_DRAW)
-
         this.texCoords = new Float32Array([
             0.0, 1.0,
             1.0, 1.0,
             1.0, 0.0,
             0.0, 0.0
+            // 0.0, 2.0,
+            // 2.0, 2.0,
+            // 2.0, 0.0,
+            // 0.0, 0.0
         ])
         this.texBufferId = gl.createBuffer()
         gl.bindBuffer(gl.ARRAY_BUFFER, this.texBufferId)
@@ -44,20 +37,37 @@ class Square {
         // Crear una textura
         this.texture = gl.createTexture()
         gl.bindTexture(gl.TEXTURE_2D, this.texture)
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE,new Uint8Array([255, 255, 0, 255]))
+        const type = gl.TEXTURE_2D // Tipo de textura
+        const level = 0 // Nivel de detalle (mipmap)
+        const colorFormat = gl.RGBA // Formato de color
+        const texWidth = 1 // Ancho de la textura
+        const texHeight = 1 // Alto de la textura
+        const texBorder = 0 // Borde de la textura
+        const texFormat = gl.RGBA // Formato del texel
+        const texType = gl.UNSIGNED_BYTE // Tipo del texel
+        const pixels = new Uint8Array([255, 255, 0, 255]) // Datos
+
+        gl.texImage2D(type, level, colorFormat,
+            texWidth, texHeight, texBorder, // Dimensiones
+            texFormat, texType, pixels)
         
+        // Wrapping de la textura
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT)
+        // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT)
         var _this = this
         var image = new Image();
-        image.src = "img/base_texture.png";
+        image.src = "img/base_texture_2.jpg";
         image.addEventListener('load', function() {
             gl.bindTexture(gl.TEXTURE_2D, _this.texture)
             gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
+            // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
             gl.generateMipmap(gl.TEXTURE_2D)
         });
     }
     draw() {
         const aPos = gl.getAttribLocation(program, 'aPos')
-        const aColor = gl.getAttribLocation(program, 'aColor')
         const aTexcoord = gl.getAttribLocation(program, 'aTexcoord')
         const uTexture = gl.getUniformLocation(program, 'uTexture')
 
@@ -65,15 +75,11 @@ class Square {
         gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0)
         gl.enableVertexAttribArray(aPos)
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBufferId)
-        gl.vertexAttribPointer(aColor, 4, gl.FLOAT, false, 0, 0)
-        gl.enableVertexAttribArray(aColor)
-
         gl.bindBuffer(gl.ARRAY_BUFFER, this.texBufferId)
         gl.vertexAttribPointer(aTexcoord, 2, gl.FLOAT, false, 0, 0)
         gl.enableVertexAttribArray(aTexcoord)
         gl.uniform1i(uTexture, 0);
-
+        
         gl.drawElements(gl.TRIANGLES, this.indices.length, gl.UNSIGNED_SHORT, 0)
     }
 }
