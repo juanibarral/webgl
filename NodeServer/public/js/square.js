@@ -12,9 +12,9 @@ class Square {
         gl.bufferData(gl.ARRAY_BUFFER, this.vertices, gl.STATIC_DRAW)
         
         this.texCoords = new Float32Array([
-            0.0, 1.0,
-            1.0, 1.0,
-            1.0, 0.0,
+            0.0, 2.0,
+            2.0, 2.0,
+            2.0, 0.0,
             0.0, 0.0
             // 0.0, 2.0,
             // 2.0, 2.0,
@@ -52,10 +52,11 @@ class Square {
             texFormat, texType, pixels)
         
         // Wrapping de la textura
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-        // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT)
-        // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT)
+        // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT)
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT)
+       
         var _this = this
         var image = new Image();
         image.src = "img/base_texture_2.jpg";

@@ -91,13 +91,14 @@ function createHeightmap(image) {
   }
   // Calcular normales para poder rsponder a la luz
   geometry.computeFaceNormals();
+  geometry.computeVertexNormals();
   // Centrarla
   geometry.translate(width / -2, 0, height / -2);
   // Cargar la imagen para usar como textura
   const loader = new THREE.TextureLoader();
   const texture = loader.load('./img/terrain_texture.jpg');
   // Mapear la textura
-  const material = new THREE.MeshPhongMaterial({ map: texture});
+  const material = new THREE.MeshPhongMaterial({ map: texture, flatShading: false});
   // Crear la malla
   const terrain = new THREE.Mesh(geometry, material);
   scene.add(terrain);

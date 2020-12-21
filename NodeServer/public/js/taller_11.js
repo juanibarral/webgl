@@ -30,7 +30,7 @@ function init() {
     camara.eye = [x, y, z]
     square = new Square()
 
-    // gl.enable(gl.CULL_FACE)
+    gl.enable(gl.CULL_FACE)
 
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);

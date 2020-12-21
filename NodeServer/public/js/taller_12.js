@@ -11,8 +11,12 @@ const geometry = new THREE.BoxGeometry(5, 5, 5)
 const material = new THREE.MeshBasicMaterial( { color: 0xff0000 } )
 
 const loader = new THREE.TextureLoader()
+const texture = loader.load('./img/base_texture_2.jpg')
+// texture.wrapS = THREE.RepeatWrapping;
+// texture.wrapT = THREE.RepeatWrapping;
+// texture.repeat.set(2, 2)
 const texMaterial = new THREE.MeshBasicMaterial({
-    map: loader.load('./img/base_texture_2.jpg')
+    map: texture
 })
 
 // Meshes
