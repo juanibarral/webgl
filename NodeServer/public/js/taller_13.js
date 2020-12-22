@@ -12,7 +12,7 @@ const controls = new OrbitControls( camera, renderer.domElement );
 const imgLoader = new THREE.ImageLoader();
 imgLoader.load('./img/terrain_heightmap.jpg', createHeightmap);
 
-const maxHeight = 100
+const maxHeight = 50
 function createHeightmap(image) {
   // Extraer los colores dibujando la imagen en un canvas  
   const ctx = document.createElement('canvas').getContext('2d');
@@ -99,6 +99,7 @@ function createHeightmap(image) {
   const texture = loader.load('./img/terrain_texture.jpg');
   // Mapear la textura
   const material = new THREE.MeshPhongMaterial({ map: texture, flatShading: false});
+  // const material = new THREE.MeshPhongMaterial({ color: 0xffff00});
   // Crear la malla
   const terrain = new THREE.Mesh(geometry, material);
   scene.add(terrain);

@@ -18,7 +18,7 @@
     {
         gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * aPos;
         vTexcoord = aTexcoord;
-        //gl_PointSize = 128.0;
+        gl_PointSize = 128.0;
     }
 </script>
 <script id="fragment-shader" type="x-shader/x-fragment">
@@ -27,8 +27,8 @@
 
     void main()
     {
-        gl_FragColor = texture2D(uTexture, vTexcoord);
-        //gl_FragColor = texture2D(uTexture, gl_PointCoord);
+        //gl_FragColor = texture2D(uTexture, vTexcoord);
+        gl_FragColor = texture2D(uTexture, gl_PointCoord);
     }
 </script>
 <script type="text/javascript" src="http://www.khronos.org/registry/webgl/sdk/demos/common/webgl-utils.js"></script>
@@ -48,7 +48,7 @@
         <br>
         <input type="range" name="range_cam_x" id="r_cam_x" min="-45" max="45" value="25" oninput="updateRotCamX(this.value)" style="width: 400px;"/>
         <input type="text" id="rot_cam_x" readonly></input>
-    </form>
+    </form>     
 </body>
 
 </html>

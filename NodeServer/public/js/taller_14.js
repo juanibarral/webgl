@@ -82,6 +82,7 @@ const animate = function (now) {
         i = 0
       }
       const p = points[i]
+
       let newPos = new THREE.Vector3(p.x, p.y, p.z)
       cubeNode.position.x = newPos.x
       cubeNode.position.y = newPos.y

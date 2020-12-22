@@ -13,9 +13,9 @@ const controls = new OrbitControls( camera, renderer.domElement )
 const whiteMaterial = new THREE.MeshPhongMaterial(
   {
     color: 0xffffff,
-    // emissive: 0xff0000,
-    specular: 0xFFFFFF,
-    shininess: 0,
+    emissive: 0xff0000,
+    specular: 0xFF0000,
+    shininess: 300,
     flatShading: false // true: normales por cara, false normales por vertice 
   }
 )
@@ -48,42 +48,58 @@ loader.load(
 // Iluminación
 // Parámetros
 const color = 0xFFFFFF
-const intensity = 0.8
+const intensity = 1
 // Luz ambiente
 // const ambientLight = new THREE.AmbientLight(color, intensity)
 // scene.add(ambientLight)
 
 // Luz hemisférica
 // const skyColor = 0xFF0000
-// const groundColor = 0x00FF00
+// const groundColor = 0xAAAAAA
 // const hemisphereLight = new THREE.HemisphereLight(skyColor, groundColor, intensity);
 // scene.add(hemisphereLight);
 
 
 // Luz direccional
-const directionalLight = new THREE.DirectionalLight(color, intensity)
-directionalLight.position.set(0, 2, 4)
-directionalLight.target.position.set(0, 0, 0)
-directionalLight.target.updateMatrixWorld()
-scene.add(directionalLight)
-scene.add(directionalLight.target)
+// const directionalLight = new THREE.DirectionalLight(color, intensity)
+// directionalLight.position.set(0, 2, 4)
+// directionalLight.target.position.set(0, 0, 4)
+// directionalLight.target.updateMatrixWorld()
+// scene.add(directionalLight)
+// scene.add(directionalLight.target)
 // const dirLightHelper = new THREE.DirectionalLightHelper(directionalLight)
 // dirLightHelper.update()
 // scene.add(dirLightHelper)
 
 // Luz puntual
-// const pointLight = new THREE.PointLight(color, intensity)
-// pointLight.position.set(0, 2, 4)
-// pointLight.distance = 0 // Por defecto es 0
-// scene.add(pointLight)
-// const pointLightHelper = new THREE.PointLightHelper(pointLight)
-// scene.add(pointLightHelper)
+const pointLight = new THREE.PointLight(color, intensity)
+pointLight.position.set(0, 2, 4)
+pointLight.distance = 0 // Por defecto es 0
+scene.add(pointLight)
+const pointLightHelper = new THREE.PointLightHelper(pointLight)
+scene.add(pointLightHelper)
+
+
+
+const pointLight2 = new THREE.PointLight(color, intensity)
+pointLight2.position.set(4, -2, 0)
+pointLight2.distance = 0 // Por defecto es 0
+scene.add(pointLight2)
+const pointLightHelper2 = new THREE.PointLightHelper(pointLight2)
+scene.add(pointLightHelper2)
+
+const pointLight3 = new THREE.PointLight(color, intensity)
+pointLight3.position.set(-4, 0, -4)
+pointLight3.distance = 0 // Por defecto es 0
+scene.add(pointLight3)
+const pointLightHelper3 = new THREE.PointLightHelper(pointLight3)
+scene.add(pointLightHelper3)
 
 // Spotlight
 // const spotLight = new THREE.SpotLight(color, intensity);
 // spotLight.position.set(0, 2, 4)
 // spotLight.angle = 45 * Math.PI / 180
-// spotLight.penumbra = 0.5
+// spotLight.penumbra = 0.2
 // spotLight.target.position.set(0, 0, 0)
 // spotLight.target.updateMatrixWorld();
 // scene.add(spotLight);

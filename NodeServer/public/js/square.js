@@ -12,9 +12,9 @@ class Square {
         gl.bufferData(gl.ARRAY_BUFFER, this.vertices, gl.STATIC_DRAW)
         
         this.texCoords = new Float32Array([
-            0.0, 2.0,
-            2.0, 2.0,
-            2.0, 0.0,
+            0.0, 1.0,
+            1.0, 1.0,
+            1.0, 0.0,
             0.0, 0.0
             // 0.0, 2.0,
             // 2.0, 2.0,
@@ -54,8 +54,8 @@ class Square {
         // Wrapping de la textura
         // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
         // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT)
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT)
+        // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT)
+        // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT)
        
         var _this = this
         var image = new Image();
@@ -78,7 +78,7 @@ class Square {
 
         gl.bindBuffer(gl.ARRAY_BUFFER, this.texBufferId)
         gl.vertexAttribPointer(aTexcoord, 2, gl.FLOAT, false, 0, 0)
-        gl.enableVertexAttribArray(aTexcoord)
+        // gl.enableVertexAttribArray(aTexcoord)
         gl.uniform1i(uTexture, 0);
         
         gl.drawElements(gl.TRIANGLES, this.indices.length, gl.UNSIGNED_SHORT, 0)

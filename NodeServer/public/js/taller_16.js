@@ -20,9 +20,9 @@ const whiteMaterial = new THREE.MeshPhongMaterial(
     // emissive: 0xff0000,
     // specular: 0x00FF00,
     // shininess: 30,
-    // map: texture, 
-    // normalMap: normalTexture,
-    bumpMap: bumpTexture,
+    map: texture, 
+    normalMap: normalTexture,
+    // bumpMap: bumpTexture,
     flatShading: false // true: normales por cara, false normales por vertice 
   }
 )
@@ -38,12 +38,12 @@ const color = 0xFFFFFF
 const intensity = 1
 
 // Luz direccional
-const directionalLight = new THREE.DirectionalLight(color, intensity)
-directionalLight.position.set(0, 4, 4)
-directionalLight.target.position.set(0, 0, 0)
-directionalLight.target.updateMatrixWorld()
-scene.add(directionalLight)
-scene.add(directionalLight.target)
+const pointLight = new THREE.PointLight(color, intensity)
+pointLight.position.set(0, 0, 4)
+pointLight.distance = 0 // Por defecto es 0
+scene.add(pointLight)
+const pointLightHelper = new THREE.PointLightHelper(pointLight)
+scene.add(pointLightHelper)
 
 // Helpers
 const axesHelper = new THREE.AxesHelper(5)
